@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transit Lab — Metro Network Control</title>
+<meta name="description" content="A live metro network control room with an interactive map, Dijkstra journey planning, line filters and simulated trains.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark">TL</span>
+      <div>
+        <strong>Transit Lab</strong>
+        <small>Metro network control</small>
+      </div>
+    </div>
+    <div class="top-stats">
+      <div class="stat"><span id="clock">00:00:00</span><small>Local time</small></div>
+      <div class="stat"><span class="good">Normal service</span><small>Network status</small></div>
+      <div class="stat"><span id="train-count">08</span><small>Trains running</small></div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel lines-panel">
+      <div class="panel-head">
+        <span>Lines</span>
+        <span id="line-count">04</span>
+      </div>
+      <div class="line-list" id="line-list"></div>
+      <div class="panel-head spaced">
+        <span>Service board</span>
+        <span class="live-dot">Live</span>
+      </div>
+      <div class="alerts" id="alerts"></div>
+      <p class="hint">Click a station on the map to set your journey. Toggle a line to remove it from routing.</p>
+    </aside>
+
+    <section class="panel map-panel">
+      <div class="map-head">
+        <div>
+          <p class="eyebrow">Live network</p>
+          <h1>Move through the city.</h1>
+        </div>
+        <div class="legend">
+          <span><i class="dot green"></i>Green</span>
+          <span><i class="dot cyan"></i>Cyan</span>
+          <span><i class="dot amber"></i>Amber</span>
+          <span><i class="dot rose"></i>Rose</span>
+        </div>
+      </div>
+      <div class="map-wrap" id="map-wrap">
+        <svg id="map" viewBox="0 0 900 580" role="img" aria-label="Interactive metro map of fourteen stations and four lines"></svg>
+        <div class="map-tip" id="map-tip" hidden></div>
+      </div>
+      <div class="map-foot">
+        <span id="map-note">Pick a station to begin.</span>
+        <span class="sim"><i></i>Simulation running</span>
+      </div>
+    </section>
+
+    <aside class="panel planner">
+      <div class="panel-head">
+        <span>Journey planner</span>
+        <span>Fastest</span>
+      </div>
+      <label class="field">From
+        <select id="from"></select>
+      </label>
+      <label class="field">To
+        <select id="to"></select>
+      </label>
+      <div class="planner-actions">
+        <button id="plan" class="primary" type="button">Find route</button>
+        <button id="swap" class="icon-button" type="button" aria-label="Swap stations">⇅</button>
+      </div>
+      <div class="route" id="route"></div>
+      <div class="panel-head spaced">
+        <span>Next departures</span>
+        <span id="departure-station">Harbor</span>
+      </div>
+      <div class="departures" id="departures"></div>
+      <div class="keyline">
+        <span><kbd>R</kbd> plan</span>
+        <span><kbd>S</kbd> swap</span>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>Transit Lab / Network operations demo</span>
+    <span>All times simulated</span>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
